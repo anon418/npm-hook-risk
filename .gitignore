@@ -1,0 +1,7 @@
+samples/malicious-raw/
+samples/malicious-unpacked/
+samples/real-benign-expanded/
+results/
+external/
+__pycache__/
+*.tgz
