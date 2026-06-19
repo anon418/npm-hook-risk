@@ -1,0 +1,36 @@
+samples/malicious-raw/
+samples/malicious-unpacked/
+samples/real-benign-expanded/
+results/
+external/
+__pycache__/
+*.tgz
+
+# Local caches and temporary directories
+.cache/
+.test-tmp/
+
+# Python
+.venv/
+venv/
+*.py[cod]
+
+# Temporary research manifests
+datasets/manifest.first5.csv
+datasets/manifest.cypress.csv
+datasets/manifest.core-js.csv
+datasets/registry_snapshots/
+
+# Local test/run configurations
+research/core-js_test_config.json
+research/cypress_test_config.json
+research/corpus_run_config.json
+
+# Backup and editor files
+*.bak
+*.sedbak
+*.tmp
+*~
+
+paper/
+atca_research/

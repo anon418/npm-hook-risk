@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "npm-hook-risk public preview user summary",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "tool_version",
+    "engine_profile",
+    "review_priority_model",
+    "package",
+    "analysis_status",
+    "review_priority",
+    "hooks",
+    "observed_behaviors",
+    "taint_summary",
+    "scope",
+    "review_targets",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0"},
+    "tool_version": {"type": "string"},
+    "engine_profile": {"type": "string"},
+    "review_priority_model": {"type": "string"},
+    "legacy_recorded_rule_hash": {"type": "string"},
+    "legacy_hash_note": {"type": "string"},
+    "package": {
+      "type": "object",
+      "required": ["name", "version", "path"],
+      "properties": {
+        "name": {"type": ["string", "null"]},
+        "version": {"type": ["string", "null"]},
+        "path": {"type": ["string", "null"]}
+      }
+    },
+    "analysis_status": {
+      "type": "object",
+      "required": ["status", "message"],
+      "properties": {
+        "status": {"type": "string"},
+        "message": {"type": "string"}
+      }
+    },
+    "review_priority": {
+      "type": "object",
+      "required": ["level", "score", "is_malicious_verdict"],
+      "properties": {
+        "level": {"type": "string", "enum": ["high", "medium", "low", "unavailable"]},
+        "score": {"type": ["integer", "null"]},
+        "is_malicious_verdict": {"type": "boolean", "const": false}
+      }
+    },
+    "hooks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["hook", "command"],
+        "properties": {
+          "hook": {"type": "string"},
+          "command": {"type": "string"}
+        }
+      }
+    },
+    "observed_behaviors": {"type": "array", "items": {"type": "string"}},
+    "taint_summary": {
+      "type": "object",
+      "required": ["state", "path_count"],
+      "properties": {
+        "state": {"type": "string", "enum": ["present", "absent", "unavailable", "not_applicable"]},
+        "path_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "scope": {
+      "type": "object",
+      "required": ["entry_files", "reachable_file_count", "failed_file_count"],
+      "properties": {
+        "entry_files": {"type": "array", "items": {"type": "string"}},
+        "reachable_file_count": {"type": "integer", "minimum": 0},
+        "failed_file_count": {"type": "integer", "minimum": 0},
+        "path": {"type": ["string", "null"]}
+      }
+    },
+    "review_targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file", "reason"],
+        "properties": {
+          "file": {"type": "string"},
+          "line": {"type": ["integer", "null"], "minimum": 1},
+          "reason": {"type": "string"}
+        }
+      }
+    },
+    "score_evidence": {"type": "array"},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}
